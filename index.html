@@ -1,907 +1,310 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rota Particular — Controle total das suas corridas</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-:root{
-  --bg:#ffffff;
-  --surface:#f8f8f8;
-  --surface2:#111111;
-  --text:#0b0b0b;
-  --muted:#666666;
-  --border:#ececec;
-  --green:#00c781;
-  --green-dark:#00a86c;
-  --green-soft:rgba(0,199,129,.10);
-  --radius:20px;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-}
-
-.container{
-  width:100%;
-  max-width:1200px;
-  margin:0 auto;
-  padding:0 24px;
-}
-
-nav{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  z-index:999;
-  backdrop-filter:blur(18px);
-  background:rgba(255,255,255,.88);
-  border-bottom:1px solid var(--border);
-}
-
-.nav-inner{
-  height:74px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
-}
-
-.logo-mark{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  background:var(--green);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#000;
-  font-weight:800;
-  font-size:20px;
-}
-
-.logo-text{
-  line-height:1;
-}
-
-.logo-text strong{
-  display:block;
-  font-size:14px;
-  letter-spacing:.08em;
-}
-
-.logo-text span{
-  font-size:10px;
-  color:var(--muted);
-  letter-spacing:.12em;
-}
-
-.nav-links{
-  display:flex;
-  gap:28px;
-}
-
-.nav-links a{
-  text-decoration:none;
-  color:var(--muted);
-  font-size:14px;
-  font-weight:500;
-  transition:.2s;
-}
-
-.nav-links a:hover{
-  color:var(--text);
-}
-
-.nav-btn{
-  padding:12px 22px;
-  background:var(--text);
-  color:#fff;
-  border-radius:12px;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:600;
-}
-
-.hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  position:relative;
-  overflow:hidden;
-}
-
-.hero-glow{
-  position:absolute;
-  width:700px;
-  height:700px;
-  background:radial-gradient(circle,rgba(0,199,129,.12) 0%,transparent 70%);
-  top:-180px;
-  right:-200px;
-}
-
-.hero-grid{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:60px;
-  align-items:center;
-  padding-top:120px;
-}
-
-.hero-tag{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 18px;
-  border-radius:999px;
-  background:var(--green-soft);
-  color:var(--green-dark);
-  font-size:12px;
-  font-weight:600;
-  margin-bottom:28px;
-}
-
-.hero h1{
-  font-size:clamp(44px,7vw,82px);
-  line-height:.95;
-  letter-spacing:-.05em;
-  margin-bottom:26px;
-}
-
-.hero h1 span{
-  color:var(--green);
-}
-
-.hero p{
-  font-size:18px;
-  line-height:1.7;
-  color:var(--muted);
-  max-width:620px;
-  margin-bottom:36px;
-}
-
-.hero-actions{
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
-}
-
-.btn-primary,
-.btn-secondary{
-  padding:16px 28px;
-  border-radius:14px;
-  text-decoration:none;
-  font-size:15px;
-  font-weight:600;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  transition:.2s;
-}
-
-.btn-primary{
-  background:var(--green);
-  color:#000;
-}
-
-.btn-primary:hover{
-  transform:translateY(-2px);
-}
-
-.btn-secondary{
-  border:1px solid var(--border);
-  color:var(--text);
-}
-
-.hero-stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-  margin-top:52px;
-}
-
-.stat{
-  padding:24px;
-  border:1px solid var(--border);
-  border-radius:18px;
-  background:#fff;
-}
-
-.stat h3{
-  font-size:28px;
-  margin-bottom:6px;
-}
-
-.stat span{
-  color:var(--muted);
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
-
-.phone{
-  background:#0d0d0d;
-  border-radius:42px;
-  padding:18px;
-  max-width:320px;
-  margin:0 auto;
-  box-shadow:0 30px 80px rgba(0,0,0,.18);
-}
-
-.phone-screen{
-  background:#fff;
-  border-radius:30px;
-  overflow:hidden;
-}
-
-.phone-top{
-  background:#111;
-  color:#fff;
-  padding:18px;
-  text-align:center;
-  font-size:13px;
-}
-
-.app-card{
-  padding:22px;
-}
-
-.balance{
-  background:var(--green-soft);
-  border:1px solid rgba(0,199,129,.18);
-  padding:24px;
-  border-radius:22px;
-  margin-bottom:18px;
-}
-
-.balance small{
-  color:var(--green-dark);
-  display:block;
-  margin-bottom:10px;
-}
-
-.balance h2{
-  font-size:38px;
-}
-
-.ride-item{
-  display:flex;
-  justify-content:space-between;
-  padding:16px 0;
-  border-bottom:1px solid var(--border);
-}
-
-section{
-  padding:110px 0;
-}
-
-.section-head{
-  text-align:center;
-  max-width:760px;
-  margin:0 auto 70px;
-}
-
-.section-tag{
-  color:var(--green-dark);
-  text-transform:uppercase;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.14em;
-  margin-bottom:18px;
-}
-
-.section-head h2{
-  font-size:clamp(34px,5vw,54px);
-  letter-spacing:-.04em;
-  line-height:1.05;
-  margin-bottom:20px;
-}
-
-.section-head p{
-  color:var(--muted);
-  line-height:1.8;
-  font-size:16px;
-}
-
-.problem-grid,
-.feature-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-
-.card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:28px;
-  transition:.25s;
-}
-
-.card:hover{
-  transform:translateY(-4px);
-}
-
-.card-icon{
-  width:52px;
-  height:52px;
-  border-radius:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--green-soft);
-  margin-bottom:18px;
-}
-
-.card-icon i{
-  font-size:24px;
-  color:var(--green-dark);
-}
-
-.card h3{
-  margin-bottom:12px;
-  font-size:18px;
-}
-
-.card p{
-  color:var(--muted);
-  line-height:1.7;
-  font-size:14px;
-}
-
-.comparison{
-  background:var(--surface);
-}
-
-.compare-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
-}
-
-.compare-box{
-  background:#fff;
-  border-radius:28px;
-  padding:38px;
-  border:1px solid var(--border);
-}
-
-.compare-box h3{
-  margin-bottom:26px;
-  font-size:28px;
-}
-
-.compare-list{
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-
-.compare-item{
-  display:flex;
-  align-items:flex-start;
-  gap:12px;
-  color:var(--muted);
-  line-height:1.6;
-}
-
-.bad i{
-  color:#e03f3f;
-}
-
-.good i{
-  color:var(--green);
-}
-
-.steps{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:20px;
-}
-
-.step{
-  text-align:center;
-}
-
-.step-num{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:var(--green-soft);
-  color:var(--green-dark);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:800;
-  font-size:22px;
-  margin:0 auto 22px;
-}
-
-.step h3{
-  margin-bottom:10px;
-}
-
-.step p{
-  color:var(--muted);
-  line-height:1.7;
-  font-size:14px;
-}
-
-.cta{
-  background:#0c0c0c;
-  color:#fff;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-
-.cta::before{
-  content:'';
-  position:absolute;
-  width:700px;
-  height:300px;
-  background:radial-gradient(circle,rgba(0,199,129,.16) 0%,transparent 70%);
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-}
-
-.cta .container{
-  position:relative;
-  z-index:2;
-}
-
-.cta h2{
-  font-size:clamp(38px,5vw,64px);
-  letter-spacing:-.05em;
-  line-height:1;
-  margin-bottom:22px;
-}
-
-.cta p{
-  max-width:700px;
-  margin:0 auto 36px;
-  color:rgba(255,255,255,.65);
-  line-height:1.8;
-}
-
-footer{
-  padding:34px 0;
-  border-top:1px solid rgba(255,255,255,.08);
-  background:#0c0c0c;
-  color:rgba(255,255,255,.5);
-  text-align:center;
-  font-size:13px;
-}
-
-@media(max-width:980px){
-  .hero-grid,
-  .compare-grid,
-  .problem-grid,
-  .feature-grid,
-  .steps{
-    grid-template-columns:1fr;
-  }
-
-  .hero-stats{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .nav-links{
-    display:none;
-  }
-
-  .hero{
-    padding-bottom:80px;
-  }
-
-  section{
-    padding:80px 0;
-  }
-
-  .hero h1{
-    font-size:52px;
-  }
-}
-</style>
-</head>
-<body>
-
-<nav>
-  <div class="container nav-inner">
-    <a href="#" class="logo">
-      <div class="logo-mark">R</div>
-      <div class="logo-text">
-        <strong>ROTA</strong>
-        <span>PARTICULAR</span>
-      </div>
-    </a>
-
-    <div class="nav-links">
-      <a href="#problema">Problema</a>
-      <a href="#vantagens">Vantagens</a>
-      <a href="#funcionalidades">Funcionalidades</a>
-      <a href="#como-funciona">Como funciona</a>
-    </div>
-
-    <a href="#cta" class="nav-btn">Começar</a>
-  </div>
-</nav>
-
-<section class="hero">
-  <div class="hero-glow"></div>
-
-  <div class="container hero-grid">
-    <div>
-      <div class="hero-tag">
-        <i class="ti ti-car"></i>
-        Plataforma para motoristas particulares
-      </div>
-
-      <h1>
-        Controle total das suas corridas.<br>
-        <span>Receba via Pix.</span>
-      </h1>
-
-      <p>
-        Calcule a rota, defina o valor da corrida, gere o QR Code Pix e receba direto na sua conta em segundos. Sem taxas, sem maquininha e sem depender de aplicativos de corrida.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#cta" class="btn-primary">
-          <i class="ti ti-rocket"></i>
-          Começar gratuitamente
-        </a>
-
-        <a href="#funcionalidades" class="btn-secondary">
-          <i class="ti ti-device-mobile"></i>
-          Ver funcionalidades
-        </a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat">
-          <h3>0%</h3>
-          <span>Taxa por corrida</span>
-        </div>
-
-        <div class="stat">
-          <h3>Pix</h3>
-          <span>Pagamento instantâneo</span>
-        </div>
-
-        <div class="stat">
-          <h3>GPS</h3>
-          <span>Cálculo automático</span>
-        </div>
-
-        <div class="stat">
-          <h3>100%</h3>
-          <span>Controle do motorista</span>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="phone">
-        <div class="phone-screen">
-          <div class="phone-top">
-            Rota Particular
-          </div>
-
-          <div class="app-card">
-            <div class="balance">
-              <small>Ganhos do dia</small>
-              <h2>R$ 480</h2>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Rota Particular — Controle total das suas corridas</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <style>* { margin: 0; padding: 0; box-sizing: border-box; } :root { --bg: #ffffff; --surface: #f8f8f8; --surface2: #111111; --text: #0b0b0b; --muted: #666666; --border: #ececec; --green: #00c781; --green-dark: #00a86c; --green-soft: rgba(0,199,129,.10); --radius: 20px; } html { scroll-behavior: smooth; } body { font-family: 'Inter',sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; } .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; } nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 999; backdrop-filter: blur(18px); background: rgba(255,255,255,.88); border-bottom: 1px solid var(--border); } .nav-inner { height: 74px; display: flex; align-items: center; justify-content: space-between; } .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; } .logo-mark { width: 42px; height: 42px; border-radius: 12px; background: var(--green); display: flex; align-items: center; justify-content: center; color: #000; font-weight: 800; font-size: 20px; } .logo-text { line-height: 1; } .logo-text strong { display: block; font-size: 14px; letter-spacing: .08em; } .logo-text span { font-size: 10px; color: var(--muted); letter-spacing: .12em; } .nav-links { display: flex; gap: 28px; } .nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500; transition: .2s; } .nav-links a:hover { color: var(--text); } .nav-btn { padding: 12px 22px; background: var(--text); color: #fff; border-radius: 12px; text-decoration: none; font-size: 14px; font-weight: 600; } .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; } .hero-glow { position: absolute; width: 700px; height: 700px; background: radial-gradient(circle,rgba(0,199,129,.12) 0%,transparent 70%); top: -180px; right: -200px; } .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 60px; align-items: center; padding-top: 120px; } .hero-tag { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: var(--green-soft); color: var(--green-dark); font-size: 12px; font-weight: 600; margin-bottom: 28px; } .hero h1 { font-size: clamp(44px,7vw,82px); line-height: .95; letter-spacing: -.05em; margin-bottom: 26px; } .hero h1 span { color: var(--green); } .hero p { font-size: 18px; line-height: 1.7; color: var(--muted); max-width: 620px; margin-bottom: 36px; } .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; } .btn-primary, .btn-secondary { padding: 16px 28px; border-radius: 14px; text-decoration: none; font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; transition: .2s; } .btn-primary { background: var(--green); color: #000; } .btn-primary:hover { transform: translateY(-2px); } .btn-secondary { border: 1px solid var(--border); color: var(--text); } .hero-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: 52px; } .stat { padding: 24px; border: 1px solid var(--border); border-radius: 18px; background: #fff; } .stat h3 { font-size: 28px; margin-bottom: 6px; } .stat span { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; } .phone { background: #0d0d0d; border-radius: 42px; padding: 18px; max-width: 320px; margin: 0 auto; box-shadow: 0 30px 80px rgba(0,0,0,.18); } .phone-screen { background: #fff; border-radius: 30px; overflow: hidden; } .phone-top { background: #111; color: #fff; padding: 18px; text-align: center; font-size: 13px; } .app-card { padding: 22px; } .balance { background: var(--green-soft); border: 1px solid rgba(0,199,129,.18); padding: 24px; border-radius: 22px; margin-bottom: 18px; } .balance small { color: var(--green-dark); display: block; margin-bottom: 10px; } .balance h2 { font-size: 38px; } .ride-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); } section { padding: 110px 0; } .section-head { text-align: center; max-width: 760px; margin: 0 auto 70px; } .section-tag { color: var(--green-dark); text-transform: uppercase; font-size: 11px; font-weight: 700; letter-spacing: .14em; margin-bottom: 18px; } .section-head h2 { font-size: clamp(34px,5vw,54px); letter-spacing: -.04em; line-height: 1.05; margin-bottom: 20px; } .section-head p { color: var(--muted); line-height: 1.8; font-size: 16px; } .problem-grid, .feature-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; } .card { background: #fff; border: 1px solid var(--border); border-radius: 24px; padding: 28px; transition: .25s; } .card:hover { transform: translateY(-4px); } .card-icon { width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: var(--green-soft); margin-bottom: 18px; } .card-icon i { font-size: 24px; color: var(--green-dark); } .card h3 { margin-bottom: 12px; font-size: 18px; } .card p { color: var(--muted); line-height: 1.7; font-size: 14px; } .comparison { background: var(--surface); } .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; } .compare-box { background: #fff; border-radius: 28px; padding: 38px; border: 1px solid var(--border); } .compare-box h3 { margin-bottom: 26px; font-size: 28px; } .compare-list { display: flex; flex-direction: column; gap: 18px; } .compare-item { display: flex; align-items: flex-start; gap: 12px; color: var(--muted); line-height: 1.6; } .bad i { color: #e03f3f; } .good i { color: var(--green); } .steps { display: grid; grid-template-columns: repeat(5,1fr); gap: 20px; } .step { text-align: center; } .step-num { width: 70px; height: 70px; border-radius: 50%; background: var(--green-soft); color: var(--green-dark); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 22px; margin: 0 auto 22px; } .step h3 { margin-bottom: 10px; } .step p { color: var(--muted); line-height: 1.7; font-size: 14px; } .cta { background: #0c0c0c; color: #fff; text-align: center; position: relative; overflow: hidden; } .cta::before { content: ''; position: absolute; width: 700px; height: 300px; background: radial-gradient(circle,rgba(0,199,129,.16) 0%,transparent 70%); left: 50%; top: 50%; transform: translate(-50%,-50%); } .cta .container { position: relative; z-index: 2; } .cta h2 { font-size: clamp(38px,5vw,64px); letter-spacing: -.05em; line-height: 1; margin-bottom: 22px; } .cta p { max-width: 700px; margin: 0 auto 36px; color: rgba(255,255,255,.65); line-height: 1.8; } footer { padding: 34px 0; border-top: 1px solid rgba(255,255,255,.08); background: #0c0c0c; color: rgba(255,255,255,.5); text-align: center; font-size: 13px; } @media (max-width:980px){ .hero-grid, .compare-grid, .problem-grid, .feature-grid, .steps {  grid-template-columns: 1fr; }  .hero-stats {  grid-template-columns: 1fr 1fr; }  .nav-links {  display: none; }  .hero {  padding-bottom: 80px; }  section {  padding: 80px 0; }  .hero h1 {  font-size: 52px; } }</style>
+    </head>
+    <body>
+        <nav>
+            <div class="container nav-inner">
+                <a href="#" class="logo">  <div class="logo-text">
+                        <img src="../../../../eds/Rota%20Particular/02/Rota_Particular_logo-pta.png">
+                    </div> </a>
+                <div class="nav-links">
+                    <a href="#problema">Problema</a>
+                    <a href="#vantagens">Vantagens</a>
+                    <a href="#funcionalidades">Funcionalidades</a>
+                    <a href="#como-funciona">Como funciona</a>
+                </div>
+                <a href="#cta" class="nav-btn">Começar</a>
             </div>
-
-            <div class="ride-item">
-              <div>
-                <strong>Aeroporto → Centro</strong><br>
-                <small>Pix recebido</small>
-              </div>
-              <strong>R$ 95</strong>
+        </nav>
+        <section class="hero">
+            <div class="hero-glow"></div>
+            <div class="container hero-grid">
+                <div>
+                    <div class="hero-tag">
+                        <i class="ti ti-car"></i>
+                        Plataforma para motoristas particulares
+                    </div>
+                    <h1>
+        Controle total das suas corridas.<br> <span style="color: #1bbeb5;">Receba via Pix.</span> </h1>
+                    <p>
+        Calcule a rota, defina o valor da corrida, gere o QR Code Pix e receba direto na sua conta em segundos. Sem taxas, sem maquininha e sem depender de aplicativos de corrida. </p>
+                    <div class="hero-actions">
+                        <a href="#cta" class="btn-primary"> <i class="ti ti-rocket"></i>
+          Começar gratuitamente </a>
+                        <a href="#funcionalidades" class="btn-secondary"> <i class="ti ti-device-mobile"></i>
+          Ver funcionalidades </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <h3>0%</h3>
+                            <span>Taxa por corrida</span>
+                        </div>
+                        <div class="stat">
+                            <h3>Pix</h3>
+                            <span>Pagamento instantâneo</span>
+                        </div>
+                        <div class="stat">
+                            <h3>GPS</h3>
+                            <span>Cálculo automático</span>
+                        </div>
+                        <div class="stat">
+                            <h3>100%</h3>
+                            <span>Controle do motorista</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="phone">
+                        <div class="phone-screen">
+                            <div class="phone-top">
+                                Rota Particular
+</div>
+                            <div class="app-card">
+                                <div class="balance">
+                                    <small>Ganhos do dia</small>
+                                    <h2>R$ 480</h2>
+                                </div>
+                                <div class="ride-item">
+                                    <div>
+                                        <strong>Aeroporto → Centro</strong>
+                                        <br>
+                                        <small>Pix recebido</small>
+                                    </div>
+                                    <strong>R$ 95</strong>
+                                </div>
+                                <div class="ride-item">
+                                    <div>
+                                        <strong>Hotel → Shopping</strong>
+                                        <br>
+                                        <small>Pix recebido</small>
+                                    </div>
+                                    <strong>R$ 48</strong>
+                                </div>
+                                <div class="ride-item">
+                                    <div>
+                                        <strong>Corrida executiva</strong>
+                                        <br>
+                                        <small>Pix recebido</small>
+                                    </div>
+                                    <strong>R$ 120</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="ride-item">
-              <div>
-                <strong>Hotel → Shopping</strong><br>
-                <small>Pix recebido</small>
-              </div>
-              <strong>R$ 48</strong>
+        </section>
+        <section id="problema">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-tag">O problema</div>
+                    <h2>Você faz a corrida.<br>O aplicativo fica com parte do dinheiro.</h2>
+                    <p>
+        Motoristas assumem custos, combustível, manutenção e risco — enquanto plataformas controlam clientes, preços e pagamentos. </p>
+                </div>
+                <div class="problem-grid">
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="ti ti-percentage"></i>
+                        </div>
+                        <h3>Taxas altas</h3>
+                        <p>
+          Parte significativa do valor da corrida fica com a plataforma antes mesmo do dinheiro chegar até você. </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="ti ti-ban"></i>
+                        </div>
+                        <h3>Bloqueios</h3>
+                        <p>
+          Qualquer reclamação pode causar suspensão da conta sem controle ou previsibilidade. </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="ti ti-user-off"></i>
+                        </div>
+                        <h3>Clientes não são seus</h3>
+                        <p>
+          Os dados dos passageiros permanecem na plataforma e você perde autonomia. </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="ti ti-cpu"></i>
+                        </div>
+                        <h3>Algoritmo decide tudo</h3>
+                        <p>
+          Preço, rota e disponibilidade definidos automaticamente sem liberdade para o motorista. </p>
+                    </div>
+                </div>
             </div>
-
-            <div class="ride-item">
-              <div>
-                <strong>Corrida executiva</strong><br>
-                <small>Pix recebido</small>
-              </div>
-              <strong>R$ 120</strong>
+        </section>
+        <section class="comparison" id="vantagens">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-tag">A diferença</div>
+                    <h2>Apps tradicionais vs Rota Particular</h2>
+                    <p>
+        Uma plataforma feita para motoristas que desejam independência financeira e relacionamento direto com seus clientes. </p>
+                </div>
+                <div class="compare-grid">
+                    <div class="compare-box bad">
+                        <h3>Apps de corrida</h3>
+                        <div class="compare-list">
+                            <div class="compare-item">
+                                <i class="ti ti-x"></i>
+                                Taxas cobradas em toda corrida
+                            </div>
+                            <div class="compare-item">
+                                <i class="ti ti-x"></i>
+                                Bloqueios automáticos
+                            </div>
+                            <div class="compare-item">
+                                <i class="ti ti-x"></i>
+                                Dependência de algoritmo
+                            </div>
+                            <div class="compare-item">
+                                <i class="ti ti-x"></i>
+                                Clientes pertencem à plataforma
+                            </div>
+                            <div class="compare-item">
+                                <i class="ti ti-x"></i>
+                                Menor controle financeiro
+                            </div>
+                        </div>
+                    </div>
+                    <div class="compare-box good">
+                        <h3>Rota Particular</h3>
+                        <div class="compare-list">
+                            <div class="compare-item">
+                                <i class="ti ti-check"></i>
+                                Recebimento direto via Pix
+                            </div>
+                            <div class="compare-item">
+                                <i class="ti ti-check"></i>
+                                Você controla o valor da corrida
+                            </div>
+                            <div class="compare-item">
+                                <i class="ti ti-check"></i>
+                                Carteira de clientes própria
+                            </div>
+                            <div class="compare-item">
+                                <i class="ti ti-check"></i>
+                                Sem intermediários
+                            </div>
+                            <div class="compare-item">
+                                <i class="ti ti-check"></i>
+                                Mais lucro por corrida
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="problema">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-tag">O problema</div>
-      <h2>Você faz a corrida.<br>O aplicativo fica com parte do dinheiro.</h2>
-      <p>
-        Motoristas assumem custos, combustível, manutenção e risco — enquanto plataformas controlam clientes, preços e pagamentos.
-      </p>
-    </div>
-
-    <div class="problem-grid">
-      <div class="card">
-        <div class="card-icon">
-          <i class="ti ti-percentage"></i>
-        </div>
-        <h3>Taxas altas</h3>
-        <p>
-          Parte significativa do valor da corrida fica com a plataforma antes mesmo do dinheiro chegar até você.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">
-          <i class="ti ti-ban"></i>
-        </div>
-        <h3>Bloqueios</h3>
-        <p>
-          Qualquer reclamação pode causar suspensão da conta sem controle ou previsibilidade.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">
-          <i class="ti ti-user-off"></i>
-        </div>
-        <h3>Clientes não são seus</h3>
-        <p>
-          Os dados dos passageiros permanecem na plataforma e você perde autonomia.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">
-          <i class="ti ti-cpu"></i>
-        </div>
-        <h3>Algoritmo decide tudo</h3>
-        <p>
-          Preço, rota e disponibilidade definidos automaticamente sem liberdade para o motorista.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="comparison" id="vantagens">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-tag">A diferença</div>
-      <h2>Apps tradicionais vs Rota Particular</h2>
-      <p>
-        Uma plataforma feita para motoristas que desejam independência financeira e relacionamento direto com seus clientes.
-      </p>
-    </div>
-
-    <div class="compare-grid">
-      <div class="compare-box bad">
-        <h3>Apps de corrida</h3>
-
-        <div class="compare-list">
-          <div class="compare-item">
-            <i class="ti ti-x"></i>
-            Taxas cobradas em toda corrida
-          </div>
-
-          <div class="compare-item">
-            <i class="ti ti-x"></i>
-            Bloqueios automáticos
-          </div>
-
-          <div class="compare-item">
-            <i class="ti ti-x"></i>
-            Dependência de algoritmo
-          </div>
-
-          <div class="compare-item">
-            <i class="ti ti-x"></i>
-            Clientes pertencem à plataforma
-          </div>
-
-          <div class="compare-item">
-            <i class="ti ti-x"></i>
-            Menor controle financeiro
-          </div>
-        </div>
-      </div>
-
-      <div class="compare-box good">
-        <h3>Rota Particular</h3>
-
-        <div class="compare-list">
-          <div class="compare-item">
-            <i class="ti ti-check"></i>
-            Recebimento direto via Pix
-          </div>
-
-          <div class="compare-item">
-            <i class="ti ti-check"></i>
-            Você controla o valor da corrida
-          </div>
-
-          <div class="compare-item">
-            <i class="ti ti-check"></i>
-            Carteira de clientes própria
-          </div>
-
-          <div class="compare-item">
-            <i class="ti ti-check"></i>
-            Sem intermediários
-          </div>
-
-          <div class="compare-item">
-            <i class="ti ti-check"></i>
-            Mais lucro por corrida
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="funcionalidades">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-tag">Funcionalidades</div>
-      <h2>Tudo que você precisa.<br>Nada além disso.</h2>
-      <p>
-        Interface simples, rápida e criada para o motorista trabalhar sem distrações.
-      </p>
-    </div>
-
-    <div class="feature-grid">
-      <div class="card">
-        <div class="card-icon">
-          <i class="ti ti-route"></i>
-        </div>
-        <h3>Cálculo automático</h3>
-        <p>
-          Distância, rota e valor calculados automaticamente com base no trajeto.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">
-          <i class="ti ti-qrcode"></i>
-        </div>
-        <h3>QR Code Pix</h3>
-        <p>
-          Gere cobrança instantânea com sua própria chave Pix integrada.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">
-          <i class="ti ti-map-pin"></i>
-        </div>
-        <h3>Navegação integrada</h3>
-        <p>
-          Abra rotas diretamente no Waze, Google Maps ou Apple Maps.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">
-          <i class="ti ti-chart-bar"></i>
-        </div>
-        <h3>Painel financeiro</h3>
-        <p>
-          Visualize ganhos do dia, histórico de corridas e faturamento.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="como-funciona">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-tag">Como funciona</div>
-      <h2>Fluxo simples e rápido</h2>
-      <p>
-        Menos etapas, menos burocracia e mais velocidade para trabalhar.
-      </p>
-    </div>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h3>Origem</h3>
-        <p>Informe o ponto inicial da corrida.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-num">2</div>
-        <h3>Destino</h3>
-        <p>Escolha o trajeto e calcule automaticamente.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-num">3</div>
-        <h3>QR Pix</h3>
-        <p>Gere a cobrança instantaneamente.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-num">4</div>
-        <h3>Pagamento</h3>
-        <p>Cliente paga diretamente na sua conta.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-num">5</div>
-        <h3>Navegação</h3>
-        <p>Abra a rota no aplicativo de mapas preferido.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="cta" id="cta">
-  <div class="container">
-    <div class="section-tag">Comece agora</div>
-
-    <h2>
-      Pare de dividir suas corridas com aplicativos.
-    </h2>
-
-    <p>
-      Tenha autonomia total sobre seus clientes, seus pagamentos e seus ganhos. Trabalhe com liberdade usando uma plataforma feita para motoristas particulares.
-    </p>
-
-    <a href="https://pix-drive-pro.lovable.app/auth" class="btn-primary">
-      <i class="ti ti-rocket"></i>
-      Começar Gratuitamente
-    </a>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    Rota Particular © 2026 — Mobilidade privada premium.
-  </div>
-</footer>
-
-</body>
+        </section>
+        <section id="funcionalidades">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-tag">Funcionalidades</div>
+                    <h2>Tudo que você precisa.<br>Nada além disso.</h2>
+                    <p>
+        Interface simples, rápida e criada para o motorista trabalhar sem distrações. </p>
+                </div>
+                <div class="feature-grid">
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="ti ti-route"></i>
+                        </div>
+                        <h3>Cálculo automático</h3>
+                        <p>
+          Distância, rota e valor calculados automaticamente com base no trajeto. </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="ti ti-qrcode"></i>
+                        </div>
+                        <h3>QR Code Pix</h3>
+                        <p>
+          Gere cobrança instantânea com sua própria chave Pix integrada. </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="ti ti-map-pin"></i>
+                        </div>
+                        <h3>Navegação integrada</h3>
+                        <p>
+          Abra rotas diretamente no Waze, Google Maps ou Apple Maps. </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="ti ti-chart-bar"></i>
+                        </div>
+                        <h3>Painel financeiro</h3>
+                        <p>
+          Visualize ganhos do dia, histórico de corridas e faturamento. </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="como-funciona">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-tag">Como funciona</div>
+                    <h2>Fluxo simples e rápido</h2>
+                    <p>
+        Menos etapas, menos burocracia e mais velocidade para trabalhar. </p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <h3>Origem</h3>
+                        <p>Informe o ponto inicial da corrida.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <h3>Destino</h3>
+                        <p>Escolha o trajeto e calcule automaticamente.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <h3>QR Pix</h3>
+                        <p>Gere a cobrança instantaneamente.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">4</div>
+                        <h3>Pagamento</h3>
+                        <p>Cliente paga diretamente na sua conta.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">5</div>
+                        <h3>Navegação</h3>
+                        <p>Abra a rota no aplicativo de mapas preferido.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="cta" id="cta">
+            <div class="container">
+                <div class="section-tag">Comece agora</div>
+                <h2>
+      Pare de dividir suas corridas com aplicativos. </h2>
+                <p>
+      Tenha autonomia total sobre seus clientes, seus pagamentos e seus ganhos. Trabalhe com liberdade usando uma plataforma feita para motoristas particulares. </p>
+                <a href="https://pix-drive-pro.lovable.app/auth" class="btn-primary"> <i class="ti ti-rocket"></i>
+      Começar Gratuitamente </a>
+            </div>
+        </section>
+        <footer>
+            <div class="container">
+                Rota Particular © 2026 — Mobilidade privada premium.
+</div>
+        </footer>
+    </body>
 </html>
